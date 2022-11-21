@@ -23,6 +23,7 @@
       @click="openDialog"
       fab
       small
+      :title="$store.getters.message('app.autofill')"
     >
       <!-- <v-icon>edit</v-icon> -->
       <!-- <v-icon>drive_file_rename_outline</v-icon> -->
@@ -45,7 +46,7 @@ import { Component, Vue } from "vue-property-decorator";
 export default class AutofillButton extends Vue {
   public autofillConditionGroup: AutofillConditionGroup[] | null = null;
 
-  public get isDisabled(): boolean {
+public get isDisabled(): boolean {
     if (!this.$store.state.captureControl.isCapturing) {
       this.setMatchedAutofillConditionGroup(null);
       return true;
