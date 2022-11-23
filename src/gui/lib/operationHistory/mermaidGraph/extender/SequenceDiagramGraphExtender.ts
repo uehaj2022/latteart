@@ -183,7 +183,7 @@ export default class SequenceDiagramGraphExtender
           .select((nodes[i] as Node).parentNode as d3.BaseType)
           .selectAll("line.loopLine");
 
-        loopLines.style("stroke-dasharray", 0).style("stroke-width", 2);
+        loopLines.style("stroke-dasharray", 0).style("stroke-width", 2).style("stroke", "#004e5c").style("fill"),"#b6e6ef";;
       });
 
     // When pressing the opt string.

@@ -127,13 +127,17 @@ export default class ScreenTransitionDiagram extends Vue {
   .edgeLabel
     span
       &:hover
-        color: red !important
-        font-weight: bold !important
+        color: #004e5c !important
+        cursor: pointer
   .node
     rect
+      fill: #b6e6ef !important
+      stroke: #004e5c !important
+      border-radius: 15px
       &:hover
-        fill: #FDF !important
-        stroke: red !important
+        fill: lemonchiffon !important
+        stroke: chocolate !important
+        cursor: pointer
     .label
       pointer-events: none
 </style>
