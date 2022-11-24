@@ -43,11 +43,7 @@ import { Component, Vue } from "vue-property-decorator";
 export default class AutofillButton extends Vue {
   private autofillConditionGroup: AutofillConditionGroup[] | null = null;
 
-<<<<<<< HEAD
   private get isDisabled(): boolean {
-=======
-public get isDisabled(): boolean {
->>>>>>> 685e1e1a9ec83001d279b6bc5bc9e6a9def9ca22
     if (!this.$store.state.captureControl.isCapturing) {
       this.setMatchedAutofillConditionGroup(null);
       return true;
