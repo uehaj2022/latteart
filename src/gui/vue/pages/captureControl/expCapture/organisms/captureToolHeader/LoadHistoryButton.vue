@@ -25,10 +25,6 @@
       :disabled="isDisabled"
       :title="$store.getters.message('app.import')"
     >
-      <!-- <v-icon>folder_open</v-icon> -->
-      <!-- <v-icon>snippet_folder_rounded</v-icon> -->
-      <!-- <v-icon>drive_folder_upload</v-icon> -->
-      <!-- <v-icon>cloud_circle</v-icon> -->
       <v-icon v-if="isDisabled">cancel_presentation</v-icon>
       <v-icon v-else>cloud_circle</v-icon>
     </v-btn>
@@ -70,31 +66,30 @@ import ErrorMessageDialog from "@/vue/pages/common/ErrorMessageDialog.vue";
   },
 })
 export default class LoadHistoryButton extends Vue {
-  public showMenu = false;
-  public menuX = 0;
-  public menuY = 0;
-  public errorMessageDialogOpened = false;
-  public errorMessage = "";
-  public testResults: Array<{ id: string; name: string }> = [];
+  private showMenu = false;
+  private menuX = 0;
+  private menuY = 0;
+  private errorMessageDialogOpened = false;
+  private errorMessage = "";
+  private testResults: Array<{ id: string; name: string }> = [];
 
-  public get isDisabled(): boolean {
+  private get isDisabled(): boolean {
     return this.isCapturing || this.isReplaying || this.isResuming;
   }
 
-  public get isCapturing(): boolean {
+  private get isCapturing(): boolean {
     return this.$store.state.captureControl.isCapturing;
   }
 
-  public get isReplaying(): boolean {
+  private get isReplaying(): boolean {
     return this.$store.state.captureControl.isReplaying;
   }
 
-  public get isResuming(): boolean {
+  private get isResuming(): boolean {
     return this.$store.state.captureControl.isResuming;
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public updateTestResults(e: any) {
+  private updateTestResults(e: any) {
     e.preventDefault();
 
     if (this.showMenu) {
@@ -122,8 +117,7 @@ export default class LoadHistoryButton extends Vue {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public async loadHistory(testResultId: string) {
+  private async loadHistory(testResultId: string) {
     if (!testResultId) {
       return;
     }

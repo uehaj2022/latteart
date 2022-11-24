@@ -23,7 +23,6 @@
       :disabled="isDisabled"
       :title="$store.getters.message('navigate.forward')"
     >
-      <!-- <v-icon dark>arrow_forward</v-icon> -->
       <v-icon dark>chevron_right</v-icon>
     </v-btn>
   </div>
@@ -34,20 +33,19 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class BrowserForwardButton extends Vue {
-  public get isDisabled(): boolean {
+  private get isDisabled(): boolean {
     return !this.isCapturing || !this.canDoBrowserForward;
   }
 
-  public get isCapturing(): boolean {
+  private get isCapturing(): boolean {
     return this.$store.state.captureControl.isCapturing;
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public get canDoBrowserForward() {
+  private get canDoBrowserForward() {
     return this.$store.state.captureControl.canDoBrowserForward;
   }
 
-  public browserForward(): void {
+  private browserForward(): void {
     this.$store.dispatch("captureControl/browserForward");
   }
 }

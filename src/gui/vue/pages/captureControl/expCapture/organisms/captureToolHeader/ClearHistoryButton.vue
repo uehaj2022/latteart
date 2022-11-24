@@ -25,8 +25,6 @@
       @click="resetHistory"
       :title="$store.getters.message('app.reset')"
     >
-      <!-- <v-icon>refresh</v-icon> -->
-      <!-- <v-icon>autorenew</v-icon> -->
       <v-icon v-if="isDisabled">block</v-icon>
       <v-icon v-else>autorenew</v-icon>
     </v-btn>
@@ -38,23 +36,23 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class ClearHistoryButton extends Vue {
-  public get isDisabled(): boolean {
+  private get isDisabled(): boolean {
     return this.isCapturing || this.isReplaying || this.isResuming;
   }
 
-  public get isCapturing(): boolean {
+  private get isCapturing(): boolean {
     return this.$store.state.captureControl.isCapturing;
   }
 
-  public get isReplaying(): boolean {
+  private get isReplaying(): boolean {
     return this.$store.state.captureControl.isReplaying;
   }
 
-  public get isResuming(): boolean {
+  private get isResuming(): boolean {
     return this.$store.state.captureControl.isResuming;
   }
 
-  public resetHistory(): void {
+  private resetHistory(): void {
     this.$store.dispatch("operationHistory/resetHistory");
     this.$store.dispatch("captureControl/resetTimer");
   }

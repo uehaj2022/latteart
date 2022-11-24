@@ -24,7 +24,6 @@
       :title="$store.getters.message('app.target-tab-window')"
       id="openWindowSelectorButton"
     >
-      <!-- <v-icon dark>tab_unselected</v-icon> -->
       <v-icon v-if="windowSelectorIsEnabled">tab</v-icon>
       <v-icon v-else>tab_unselected</v-icon>
     </v-btn>
@@ -49,18 +48,17 @@ import WindowSelectorDialog from "../WindowSelectorDialog.vue";
   },
 })
 export default class SelectWindowButton extends Vue {
-  public windowSelectorOpened = false;
+  private windowSelectorOpened = false;
 
-  public get config(): CaptureConfig {
+  private get config(): CaptureConfig {
     return this.$store.state.operationHistory.config;
   }
 
-  public get isCapturing(): boolean {
+  private get isCapturing(): boolean {
     return this.$store.state.captureControl.isCapturing;
   }
-
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public get windowSelectorIsEnabled() {
++
+  private get windowSelectorIsEnabled() {
     if (!this.isCapturing) {
       return false;
     }

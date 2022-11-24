@@ -25,9 +25,7 @@
       small
       :title="$store.getters.message('app.record-note')"
     >
-      <!-- <v-icon>add_comment</v-icon> -->
       <v-icon>notes</v-icon>
-      <!-- <v-icon>drive_file_rename_outline</v-icon> -->
     </v-btn>
 
     <note-edit-dialog
@@ -53,15 +51,14 @@ import NoticeEditDialog from "@/vue/pages/common/NoticeEditDialog.vue";
   },
 })
 export default class NoteRegisterButton extends Vue {
-  public noteEditDialogOpened = false;
-  public noticeEditDialogOpened = false;
+  private noteEditDialogOpened = false;
+  private noticeEditDialogOpened = false;
 
-  public get isCapturing(): boolean {
+  private get isCapturing(): boolean {
     return this.$store.state.captureControl.isCapturing;
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public open() {
+  private open() {
     if (this.$store.state.captureControl.testOption.shouldRecordTestPurpose) {
       this.noteEditDialogOpened = true;
     } else {

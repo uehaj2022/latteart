@@ -33,28 +33,27 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class TestResultNameTextField extends Vue {
-  public get isDisabled(): boolean {
+  private get isDisabled(): boolean {
     return this.isCapturing || this.isResuming;
   }
 
-  public get isCapturing(): boolean {
+  private get isCapturing(): boolean {
     return this.$store.state.captureControl.isCapturing;
   }
 
-  public get isResuming(): boolean {
+  private get isResuming(): boolean {
     return this.$store.state.captureControl.isResuming;
   }
 
-  public get testResultName(): string {
+  private get testResultName(): string {
     return this.$store.state.operationHistory.testResultInfo.name;
   }
 
-  public set testResultName(name: string) {
+  private set testResultName(name: string) {
     this.$store.commit("operationHistory/setTestResultName", { name });
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public changeCurrentTestResultName() {
+  private changeCurrentTestResultName() {
     this.$store.dispatch("operationHistory/changeCurrentTestResult", {
       startTime: null,
       initialUrl: "",

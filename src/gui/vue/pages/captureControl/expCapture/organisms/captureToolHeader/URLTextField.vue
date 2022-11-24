@@ -16,7 +16,6 @@
 
 <template>
   <v-layout justify-start align-center row>
-    <!-- <v-icon class="pr-1">upload_file</v-icon> -->
     <v-icon class="pr-1">add_link</v-icon>
     <v-text-field
       single-line
@@ -33,27 +32,27 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class URLTextField extends Vue {
-  public get isDisabled(): boolean {
+  private get isDisabled(): boolean {
     return this.isCapturing || this.isReplaying || this.isResuming;
   }
 
-  public get isCapturing(): boolean {
+  private get isCapturing(): boolean {
     return this.$store.state.captureControl.isCapturing;
   }
 
-  public get isReplaying(): boolean {
+  private get isReplaying(): boolean {
     return this.$store.state.captureControl.isReplaying;
   }
 
-  public get isResuming(): boolean {
+  private get isResuming(): boolean {
     return this.$store.state.captureControl.isResuming;
   }
 
-  public get url(): string {
+  private get url(): string {
     return this.$store.state.captureControl.url;
   }
 
-  public set url(value: string) {
+  private set url(value: string) {
     this.$store.commit("captureControl/setUrl", { url: value });
   }
 }

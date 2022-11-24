@@ -24,9 +24,6 @@
       fab
       small
     >
-      <!-- <v-icon>edit</v-icon> -->
-      <!-- <v-icon>drive_file_rename_outline</v-icon> -->
-
       <v-icon v-if="isDisabled">edit</v-icon>
       <v-icon v-else>drive_file_rename_outline</v-icon>
     </v-btn>
@@ -43,9 +40,9 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class AutofillButton extends Vue {
-  public autofillConditionGroup: AutofillConditionGroup[] | null = null;
+  private autofillConditionGroup: AutofillConditionGroup[] | null = null;
 
-  public get isDisabled(): boolean {
+  private get isDisabled(): boolean {
     if (!this.$store.state.captureControl.isCapturing) {
       this.setMatchedAutofillConditionGroup(null);
       return true;
@@ -76,8 +73,7 @@ export default class AutofillButton extends Vue {
     return isDisabled;
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public openDialog() {
+  private openDialog() {
     this.$store.commit("operationHistory/setAutofillSelectDialog", {
       dialogData: {
         autofillConditionGroups: this.autofillConditionGroup,
@@ -86,8 +82,7 @@ export default class AutofillButton extends Vue {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public setMatchedAutofillConditionGroup(
+  private setMatchedAutofillConditionGroup(
     group: AutofillConditionGroup[] | null
   ) {
     this.autofillConditionGroup = group;
