@@ -19,7 +19,9 @@
     <div class="main">
       <section>
         <input id="s1" type="checkbox" name="t1" />
-        <label for="s1">legend</label>
+        <label for="s1">{{
+          $store.getters.message("manage-show.window-title")
+        }}</label>
         <div class="content">
           <v-layout row wrap justify-center align-start>
             <div

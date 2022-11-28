@@ -235,7 +235,7 @@
     "locale": "locale"
   },
   "manage-show": {
-    "window-title": "Management Tool [top]",
+    "window-title": "Legend",
     "legend1": "( X / Y )",
     "legend2": "X: # of complete session",
     "legend3": "Y: # of planned session",
