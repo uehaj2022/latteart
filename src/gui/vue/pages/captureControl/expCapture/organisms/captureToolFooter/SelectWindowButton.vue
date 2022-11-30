@@ -57,7 +57,7 @@ export default class SelectWindowButton extends Vue {
   private get isCapturing(): boolean {
     return this.$store.state.captureControl.isCapturing;
   }
-+
+
   private get windowSelectorIsEnabled() {
     if (!this.isCapturing) {
       return false;
