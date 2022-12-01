@@ -25,7 +25,8 @@
       :title="pauseButtonTooltip"
       :color="pauseButtonColor"
     >
-      <v-icon>pause</v-icon>
+      <v-icon v-if="!isCapturing">pause</v-icon>
+      <v-icon v-else>pause_circle_outline</v-icon>
     </v-btn>
   </div>
 </template>
@@ -53,7 +54,7 @@ export default class PauseButton extends Vue {
   }
 
   private get pauseButtonColor() {
-    return this.isPaused ? "yellow" : "grey darken-3";
+    return this.isPaused ? "red" : "grey darken-3";
   }
 
   private pushPauseButton() {

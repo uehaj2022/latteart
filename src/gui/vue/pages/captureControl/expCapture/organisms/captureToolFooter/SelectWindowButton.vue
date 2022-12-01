@@ -24,7 +24,8 @@
       :title="$store.getters.message('app.target-tab-window')"
       id="openWindowSelectorButton"
     >
-      <v-icon dark>tab</v-icon>
+      <v-icon v-if="windowSelectorIsEnabled">tab</v-icon>
+      <v-icon v-else>tab_unselected</v-icon>
     </v-btn>
 
     <window-selector-dialog

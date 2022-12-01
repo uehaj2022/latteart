@@ -27,19 +27,20 @@
       :title="$store.getters.message('app.start')"
       id="startButton"
     >
-      <v-icon>fiber_manual_record</v-icon>
+      <v-icon v-if="isDisabled">block</v-icon>
+      <v-icon v-else>fiber_manual_record</v-icon>
     </v-btn>
     <v-btn
       v-else
       icon
       flat
       large
-      color="red"
+      color="green"
       @click="endCapture"
       :title="$store.getters.message('app.finish')"
       id="endButton"
     >
-      <v-icon>fiber_manual_record</v-icon>
+      <v-icon color="green">fiber_smart_record</v-icon>
     </v-btn>
 
     <test-option-dialog

@@ -16,10 +16,10 @@
 
 <template>
   <v-layout justify-start align-center row>
-    <v-icon class="pr-1">open_in_browser</v-icon>
+    <v-icon class="pr-1">add_link</v-icon>
     <v-text-field
       single-line
-      label="URL"
+      label="URL Link"
       v-model="url"
       :disabled="isDisabled"
       id="urlTextField"

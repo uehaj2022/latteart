@@ -25,7 +25,8 @@
       small
       :title="$store.getters.message('app.autofill')"
     >
-      <v-icon>edit</v-icon>
+      <v-icon v-if="isDisabled">edit</v-icon>
+      <v-icon v-else>drive_file_rename_outline</v-icon>
     </v-btn>
   </div>
 </template>
@@ -43,10 +44,7 @@ export default class AutofillButton extends Vue {
   private autofillConditionGroup: AutofillConditionGroup[] | null = null;
 
   private get isDisabled(): boolean {
-    if (
-      !this.$store.state.captureControl.isCapturing ||
-      this.$store.state.captureControl.isAutoOperation
-    ) {
+    if (!this.$store.state.captureControl.isCapturing) {
       this.setMatchedAutofillConditionGroup(null);
       return true;
     }

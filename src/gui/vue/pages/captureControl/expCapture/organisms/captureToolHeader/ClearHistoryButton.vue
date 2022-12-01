@@ -25,7 +25,8 @@
       @click="resetHistory"
       :title="$store.getters.message('app.reset')"
     >
-      <v-icon>refresh</v-icon>
+      <v-icon v-if="isDisabled">block</v-icon>
+      <v-icon v-else>autorenew</v-icon>
     </v-btn>
   </div>
 </template>

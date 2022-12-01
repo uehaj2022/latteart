@@ -25,7 +25,8 @@
       :disabled="isDisabled"
       :title="$store.getters.message('app.import')"
     >
-      <v-icon>folder_open</v-icon>
+      <v-icon v-if="isDisabled">cancel_presentation</v-icon>
+      <v-icon v-else>cloud_circle</v-icon>
     </v-btn>
 
     <v-menu
@@ -58,7 +59,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import ErrorMessageDialog from "@/vue/pages/common/ErrorMessageDialog.vue";
-import { TestResultSummary } from "@/lib/operationHistory/types";
 
 @Component({
   components: {
@@ -71,7 +71,7 @@ export default class LoadHistoryButton extends Vue {
   private menuY = 0;
   private errorMessageDialogOpened = false;
   private errorMessage = "";
-  private testResults: Array<TestResultSummary> = [];
+  private testResults: Array<{ id: string; name: string }> = [];
 
   private get isDisabled(): boolean {
     return this.isCapturing || this.isReplaying || this.isResuming;

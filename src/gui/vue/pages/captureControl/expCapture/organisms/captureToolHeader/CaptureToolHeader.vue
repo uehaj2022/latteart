@@ -66,7 +66,7 @@ import MenuButton from "./MenuButton.vue";
   },
 })
 export default class CaptureToolHeader extends Vue {
-  private cancelKeydown(event: Event) {
+  public cancelKeydown(event: Event) {
     event.stopPropagation();
   }
 }

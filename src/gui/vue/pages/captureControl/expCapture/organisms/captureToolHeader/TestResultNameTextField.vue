@@ -16,7 +16,7 @@
 
 <template>
   <v-layout justify-start align-center row>
-    <v-icon class="pl-4 pr-1">save_alt</v-icon>
+    <v-icon class="pl-4 pr-1">input</v-icon>
     <v-text-field
       single-line
       :label="$store.getters.message('app.test-result-name')"

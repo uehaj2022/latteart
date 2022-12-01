@@ -23,7 +23,7 @@
       :disabled="isDisabled"
       :title="$store.getters.message('navigate.back')"
     >
-      <v-icon dark>arrow_back</v-icon>
+      <v-icon dark>chevron_left</v-icon>
     </v-btn>
   </div>
 </template>

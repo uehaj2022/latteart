@@ -12,11 +12,23 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
-    "types": ["node", "webpack-env", "jest", "vuetify"],
+    "types": [
+      "node",
+      "webpack-env",
+      "jest",
+      "vuetify"
+    ],
     "paths": {
-      "@/*": ["src/gui/*"]
+      "@/*": [
+        "src/gui/*"
+      ]
     },
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
   },
   "include": [
     "src/gui/**/*.ts",
@@ -25,5 +37,7 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

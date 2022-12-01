@@ -23,7 +23,7 @@
       :disabled="isDisabled"
       :title="$store.getters.message('navigate.forward')"
     >
-      <v-icon dark>arrow_forward</v-icon>
+      <v-icon dark>chevron_right</v-icon>
     </v-btn>
   </div>
 </template>

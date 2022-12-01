@@ -25,7 +25,7 @@
       small
       :title="$store.getters.message('app.record-note')"
     >
-      <v-icon>add_comment</v-icon>
+      <v-icon>notes</v-icon>
     </v-btn>
 
     <note-edit-dialog
