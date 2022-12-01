@@ -140,7 +140,7 @@ export default class ElementCoverage extends Vue {
   display: block
 tr
   &.covered
-    background-color: #ddffdd
+    background-color: #befca9
   &.missed
-    background-color: #ffdddd !important
+    background-color: #ffb2b2 !important
 </style>
