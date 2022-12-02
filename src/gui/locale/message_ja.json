@@ -239,7 +239,7 @@
     "locale": "言語"
   },
   "manage-show": {
-    "window-title": "凡例",
+    "window-title": "管理ツール [トップ]",
     "legend1": "( X / Y )",
     "legend2": "X: 完了セッション数",
     "legend3": "Y: 予定セッション数",
