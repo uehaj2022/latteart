@@ -250,6 +250,13 @@
     "status-pending": "Pending",
     "text-pending": "Pending for bug fixes, etc."
   },
+  
+  "confirmation_dialog_box": {
+    "card-title": "Confirm" ,
+    "card-content":"Are you sure?",
+    "card-button-1":"Cancel",
+    "card-button-2":"Confirm"
+  },
   "test-matrix-dialog": {
     "test-matrix-name": "Test Matrix Name",
     "setting-viewPoint": "View Point Settings",
