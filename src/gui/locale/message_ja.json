@@ -254,12 +254,6 @@
     "status-pending": "修正待ち",
     "text-pending": "バグの改修などの対応待ち"
   },
-  "confirmation_dialog_box": {
-    "card-title": "確認",
-    "card-content": "本気ですか？",
-    "card-button-1": "キャンセル",
-    "card-button-2": "確認"
-  },
   "test-matrix-dialog": {
     "test-matrix-name": "テストマトリクス名",
     "setting-viewPoint": "テスト観点の設定",
