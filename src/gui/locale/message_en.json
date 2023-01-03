@@ -9,6 +9,7 @@
     "error-dialog-title": "An error has occurred",
     "download-link": "Download"
   },
+
   "app": {
     "start": "Start",
     "finish": "Finish",
@@ -37,6 +38,14 @@
     "select-operation": "Operation Selection",
     "auto-operation": "Auto Operation",
     "autofill": "Autofill"
+  },
+  "confirmation":{
+    "title": "Confirmation",
+    "message": "Are you sure you want to stop?",
+    "options":{
+      "yes": "Yes",
+      "cancel": "Cancel"
+    }
   },
   "replay": {
     "done-title": "Replay is done",

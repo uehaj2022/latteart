@@ -35,12 +35,31 @@
       flat
       large
       color="red"
-      @click="endCapture"
+      @click="showConfirmationDialog"
       :title="$store.getters.message('app.finish')"
       id="endButton"
     >
       <v-icon>fiber_manual_record</v-icon>
     </v-btn>
+    <v-dialog v-model="confirmationDialogVisible" max-width="290">
+      <v-card>
+        <v-card-title class="headline">{{
+          $store.getters.message("confirmation.title")
+        }}</v-card-title>
+        <v-card-text>{{
+          $store.getters.message("confirmation.message")
+        }}</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="red darken-1" text @click="endCapture">
+            {{ $store.getters.message("confirmation.options.yes") }}
+          </v-btn>
+          <v-btn color="white darken-1" text @click="cancelAction">
+            {{ $store.getters.message("confirmation.options.cancel") }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
     <test-option-dialog
       :opened="testOptionDialogOpened"
@@ -74,6 +93,7 @@ export default class RecordButton extends Vue {
   private preparingForCapture = false;
   private errorMessageDialogOpened = false;
   private errorMessage = "";
+  private confirmationDialogVisible = false;
 
   private get testResultName(): string {
     return this.$store.state.operationHistory.testResultInfo.name;
@@ -181,8 +201,15 @@ export default class RecordButton extends Vue {
 
   private endCapture(): void {
     this.$store.dispatch("captureControl/endCapture");
+    this.confirmationDialogVisible = false;
+  }
+  private showConfirmationDialog() {
+    this.confirmationDialogVisible = true;
   }
 
+  private cancelAction() {
+    this.confirmationDialogVisible = false;
+  }
   private goToHistoryView() {
     this.$router.push({ path: "history" }).catch((err: Error) => {
       if (err.name !== "NavigationDuplicated") {
