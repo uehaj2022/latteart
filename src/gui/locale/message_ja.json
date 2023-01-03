@@ -42,6 +42,14 @@
     "auto-operation": "自動操作",
     "autofill": "自動入力"
   },
+   "confirmation":{
+    "title": "確認",
+    "message": "停止してもよろしいですか？",
+    "options":{
+      "yes": "はい",
+      "cancel": "キャンセル"
+    }
+  },
   "replay": {
     "done-title": "テスト結果のリプレイ終了",
     "done-run-operations": "リプレイが終了しました。",
