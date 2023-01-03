@@ -50,7 +50,6 @@ export default class SVGPanZoom extends Vue {
   private mounted() {
     const panZoom = this.$refs.panZoom as any;
     const top = panZoom.getBoundingClientRect().y;
-    panZoom.style.position = "fixed";
     panZoom.style.top = top;
   }
 
