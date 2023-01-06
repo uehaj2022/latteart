@@ -84,7 +84,6 @@ export default class LocaleSelectBox extends Vue {
   private changeLocale(locale: string): void {
     (async () => {
       try {
-        console.log("this is locale", locale);
         await this.$store.dispatch("changeLocale", { locale });
         this.languageDialogBoxOpened = false;
       } catch (error) {
