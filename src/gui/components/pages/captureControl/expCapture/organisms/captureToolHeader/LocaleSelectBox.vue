@@ -23,6 +23,29 @@
       v-on:change="changeLocale"
     ></v-select>
 
+    <v-dialog v-model="languageDialogBoxOpened" max-width="490" persistent>
+      <v-card>
+        <v-card-title class="headline">
+          Choose the language / 言語を選択
+        </v-card-title>
+        <v-card-text>
+          <v-radio-group v-model="language" mandatory row>
+            <v-radio label="English" value="en" color="red"></v-radio>
+            <v-radio label="日本" value="ja" color="red"></v-radio>
+          </v-radio-group>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            @click="changeLocale(language)"
+            color="red"
+            class="white--text"
+          >
+            Apply / 申し込み
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
     <error-message-dialog
       :opened="errorMessageDialogOpened"
       :message="errorMessage"
@@ -44,6 +67,15 @@ export default class LocaleSelectBox extends Vue {
   private locales: string[] = ["ja", "en"];
   private errorMessageDialogOpened = false;
   private errorMessage = "";
+  private language = "";
+  private languageDialogBoxOpened = false;
+
+  private created(): void {
+    if (localStorage.getItem("appOpenedBefore") === null) {
+      this.languageDialogBoxOpened = true;
+      localStorage.setItem("appOpenedBefore", "true");
+    }
+  }
 
   public get initLocale(): string {
     return this.$store.getters.getLocale();
@@ -52,7 +84,9 @@ export default class LocaleSelectBox extends Vue {
   private changeLocale(locale: string): void {
     (async () => {
       try {
+        console.log("this is locale", locale);
         await this.$store.dispatch("changeLocale", { locale });
+        this.languageDialogBoxOpened = false;
       } catch (error) {
         if (error instanceof Error) {
           this.errorMessage = error.message;
