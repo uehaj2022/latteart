@@ -159,17 +159,7 @@
         :label="message('operation.notice')"
         v-model="noticeCheckbox"
       ></v-checkbox>
-      <template>
-        <v-text-field
-        class="search-item"
-        v-model="search"
-        :label="message('operation.query')"
-      ></v-text-field>
-    <div class="search-container">
-      <input type="text" class="search-item" v-model="search" />
-      <button class="search-button" @click="search" style="display: flex; justify-content: center; align-items: center;">Search<v-icon>search</v-icon></button>
-   </div>
-   </template>
+      
     </v-layout>
 
     <operation-context-menu
