@@ -22,6 +22,27 @@
       :value="initLocale"
       v-on:change="changeLocale"
     ></v-select>
+    <div>
+    <v-dialog v-model="showDialog" max-width="500">
+      <template v-slot:activator="{ on }">
+        <v-btn color="primary" v-on="on">Translate</v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span>Select a language to translate to:</span>
+        </v-card-title>
+        <v-card-text>
+          <v-select :items="languages" v-model="selectedLanguage" label="Select"></v-select>
+         
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" @click="translatePage">Translate</v-btn>
+          <v-btn color="secondary" @click="showDialog = false">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+   
+  </div>
 
     <error-message-dialog
       :opened="errorMessageDialogOpened"
@@ -34,6 +55,7 @@
 <script lang="ts">
 import ErrorMessageDialog from "@/components/pages/common/ErrorMessageDialog.vue";
 import { Component, Vue } from "vue-property-decorator";
+import { reactive, ref } from 'vue'
 
 @Component({
   components: {
@@ -42,17 +64,30 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class LocaleSelectBox extends Vue {
   private locales: string[] = ["ja", "en"];
+  private showDialog = false;
+  private languages = ["English", "Japanese"];
+  private selectedLanguage = ref(null);
   private errorMessageDialogOpened = false;
   private errorMessage = "";
 
   public get initLocale(): string {
     return this.$store.getters.getLocale();
   }
+  onMounted(() => {
+      elements.value = Array.from(this.$refs.elements);
+    });
+  private translatePage = () => {
+      let translator = new Intl.Translator();
+      translator.translate(textToTranslate.value, {to: this.selectedLanguage.value.toLowerCase()}).then(translation => {
+        translatedText.value = translation;
+      });
+    }
 
   private changeLocale(locale: string): void {
     (async () => {
       try {
         await this.$store.dispatch("changeLocale", { locale });
+        this.showDialog = false;
       } catch (error) {
         if (error instanceof Error) {
           this.errorMessage = error.message;
