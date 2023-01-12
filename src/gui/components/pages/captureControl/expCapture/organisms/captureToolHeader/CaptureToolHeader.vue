@@ -104,12 +104,6 @@ import MenuButton from "./MenuButton.vue";
   },
 })
 export default class CaptureToolHeader extends Vue {
-  private items = [
-    { title: "Click Me" },
-    { title: "Click Me" },
-    { title: "Click Me" },
-    { title: "Click Me 2" },
-  ];
   private cancelKeydown(event: Event) {
     event.stopPropagation();
   }
