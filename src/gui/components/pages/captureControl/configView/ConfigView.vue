@@ -22,29 +22,44 @@
       </p>
       <v-layout row wrap>
         <v-flex xs12 pr-1 class="pb-18">
-          <v-select
-            :label="$store.getters.message('config-view.platform')"
-            :items="platformNames"
-            :value="selectedPlatformName"
-            @change="selectPlatform"
-          ></v-select>
-          <v-select
-            :label="$store.getters.message('config-view.browser')"
-            :items="browsers"
-            :value="selectedBrowser"
-            @change="selectBrowser"
-          ></v-select>
-          <number-field
-            arrowOnly
-            @updateNumberFieldValue="
-              ({ value }) => updateWaitTimeForStartupReload(value)
-            "
-            :value="waitTimeForStartupReload"
-            :maxValue="60"
-            :minValue="0"
-            :label="$store.getters.message('config-view.reload-setting')"
-            :suffix="$store.getters.message('config-view.reload-suffix')"
-          ></number-field>
+          <v-row :align="align" no-gutters style="height: 150px">
+            <v-col md4>
+              <v-card class="pa-2" outlined tile>
+                <v-select
+                  :label="$store.getters.message('config-view.platform')"
+                  :items="platformNames"
+                  :value="selectedPlatformName"
+                  @change="selectPlatform"
+                ></v-select>
+              </v-card>
+            </v-col>
+            <v-col md4>
+              <v-card class="pa-2" outlined tile>
+                <v-select
+                  :label="$store.getters.message('config-view.browser')"
+                  :items="browsers"
+                  :value="selectedBrowser"
+                  @change="selectBrowser"
+                ></v-select>
+              </v-card>
+            </v-col>
+            <v-col md4>
+              <v-card class="pa-2" outlined tile>
+                <number-field
+                  arrowOnly
+                  @updateNumberFieldValue="
+                    ({ value }) => updateWaitTimeForStartupReload(value)
+                  "
+                  :value="waitTimeForStartupReload"
+                  :maxValue="60"
+                  :minValue="0"
+                  :label="$store.getters.message('config-view.reload-setting')"
+                  :suffix="$store.getters.message('config-view.reload-suffix')"
+                ></number-field>
+              </v-card>
+            </v-col>
+          </v-row>
+
           <v-expansion-panel v-model="panel" class="py-0">
             <v-expansion-panel-content>
               <template v-slot:header class="py-0">

@@ -24,6 +24,7 @@
       id="connectUrlTextField"
       ref="urlField"
       :disabled="isCapturing"
+      outlined
     ></v-combobox>
     <v-btn
       :color="color"

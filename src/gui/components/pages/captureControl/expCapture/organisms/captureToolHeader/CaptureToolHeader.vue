@@ -16,8 +16,8 @@
 
 <template>
   <v-layout justify-start align-center row @keydown="cancelKeydown">
-    <url-text-field />
-    <test-result-name-text-field />
+    <url-text-field outlined />
+    <test-result-name-text-field outlined />
 
     <div>
       <v-layout>
@@ -59,7 +59,6 @@ import MenuButton from "./MenuButton.vue";
     "clear-history-button": ClearHistoryButton,
     "load-history-button": LoadHistoryButton,
     "generate-test-script-button": GenerateTestScriptButton,
-
     "locale-select-box": LocaleSelectBox,
     "remote-access-field": RemoteAccessField,
     "menu-button": MenuButton,
