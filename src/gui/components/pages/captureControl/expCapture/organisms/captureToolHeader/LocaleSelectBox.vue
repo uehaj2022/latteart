@@ -21,6 +21,7 @@
       :items="locales"
       :value="initLocale"
       v-on:change="changeLocale"
+      outlined
     ></v-select>
 
     <error-message-dialog

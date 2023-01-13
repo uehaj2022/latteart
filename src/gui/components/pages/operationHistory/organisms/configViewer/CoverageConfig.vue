@@ -22,7 +22,7 @@
     <v-flex v-if="tempTagList.length <= 0">
       <v-card color="#EEE">
         <v-card-text>
-          <v-layout align-center>
+          <v-layout align-top>
             <v-flex ma-3> NO DATA </v-flex>
           </v-layout>
         </v-card-text>

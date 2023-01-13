@@ -18,7 +18,7 @@
   <v-layout justify-start align-center row>
     <v-icon class="pl-4 pr-1">save_alt</v-icon>
     <v-text-field
-      single-line
+      outlined
       :label="$store.getters.message('app.test-result-name')"
       v-model="testResultName"
       @change="changeCurrentTestResultName"

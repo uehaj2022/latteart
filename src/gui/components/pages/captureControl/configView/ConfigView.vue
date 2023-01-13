@@ -22,61 +22,89 @@
       </p>
       <v-layout row wrap>
         <v-flex xs12 pr-1 class="pb-18">
-          <v-select
-            :label="$store.getters.message('config-view.platform')"
-            :items="platformNames"
-            :value="selectedPlatformName"
-            @change="selectPlatform"
-          ></v-select>
-          <v-select
-            :label="$store.getters.message('config-view.browser')"
-            :items="browsers"
-            :value="selectedBrowser"
-            @change="selectBrowser"
-          ></v-select>
-          <number-field
-            arrowOnly
-            @updateNumberFieldValue="
-              ({ value }) => updateWaitTimeForStartupReload(value)
-            "
-            :value="waitTimeForStartupReload"
-            :maxValue="60"
-            :minValue="0"
-            :label="$store.getters.message('config-view.reload-setting')"
-            :suffix="$store.getters.message('config-view.reload-suffix')"
-          ></number-field>
+          <v-row :align="align" no-gutters style="height: 150px">
+            <v-col md4>
+              <v-card class="pa-2" outlined tile>
+                <v-select
+                  :label="$store.getters.message('config-view.platform')"
+                  :items="platformNames"
+                  :value="selectedPlatformName"
+                  @change="selectPlatform"
+                ></v-select>
+              </v-card>
+            </v-col>
+            <v-col md4>
+              <v-card class="pa-2" outlined tile>
+                <v-select
+                  :label="$store.getters.message('config-view.browser')"
+                  :items="browsers"
+                  :value="selectedBrowser"
+                  @change="selectBrowser"
+                ></v-select>
+              </v-card>
+            </v-col>
+            <v-col md4>
+              <v-card class="pa-2" outlined tile>
+                <number-field
+                  arrowOnly
+                  @updateNumberFieldValue="
+                    ({ value }) => updateWaitTimeForStartupReload(value)
+                  "
+                  :value="waitTimeForStartupReload"
+                  :maxValue="60"
+                  :minValue="0"
+                  :label="$store.getters.message('config-view.reload-setting')"
+                  :suffix="$store.getters.message('config-view.reload-suffix')"
+                ></number-field>
+              </v-card>
+            </v-col>
+          </v-row>
+
           <v-expansion-panel v-model="panel" class="py-0">
             <v-expansion-panel-content>
               <template v-slot:header class="py-0">
                 {{ $store.getters.message("config-view.setting-device") }}
               </template>
               <v-container>
-                <v-btn
-                  @click="updateDevices"
-                  :disabled="isDisabledDeviceConfig"
-                  >{{
-                    $store.getters.message("config-view.update-device")
-                  }}</v-btn
-                >
-                <v-select
-                  :label="$store.getters.message('config-view.select-device')"
-                  :value="selectedDevice"
-                  @change="selectDevice"
-                  :items="devices"
-                  item-text="modelNumber"
-                  item-value="deviceName"
-                  :disabled="isDisabledDeviceConfig"
-                  :no-data-text="
-                    $store.getters.message('config-view.no-device')
-                  "
-                  return-object
-                ></v-select>
-                <v-text-field
-                  :label="$store.getters.message('config-view.os-version')"
-                  v-model="selectedDevice.osVersion"
-                  :disabled="isDisabledDeviceConfig"
-                  readonly
-                ></v-text-field>
+                <v-row :align="align" no-gutters style="height: 150px">
+                  <v-col md4>
+                    <v-btn
+                      @click="updateDevices"
+                      outlined
+                      :disabled="isDisabledDeviceConfig"
+                      >{{
+                        $store.getters.message("config-view.update-device")
+                      }}</v-btn
+                    >
+                  </v-col>
+                  <v-col md4>
+                    <v-select
+                      outlined
+                      :label="
+                        $store.getters.message('config-view.select-device')
+                      "
+                      :value="selectedDevice"
+                      @change="selectDevice"
+                      :items="devices"
+                      item-text="modelNumber"
+                      item-value="deviceName"
+                      :disabled="isDisabledDeviceConfig"
+                      :no-data-text="
+                        $store.getters.message('config-view.no-device')
+                      "
+                      return-object
+                    ></v-select>
+                  </v-col>
+                  <v-col md4>
+                    <v-text-field
+                      :label="$store.getters.message('config-view.os-version')"
+                      v-model="selectedDevice.osVersion"
+                      :disabled="isDisabledDeviceConfig"
+                      readonly
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
               </v-container>
             </v-expansion-panel-content>
 
