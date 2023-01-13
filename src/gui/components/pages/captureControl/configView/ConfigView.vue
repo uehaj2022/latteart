@@ -66,32 +66,45 @@
                 {{ $store.getters.message("config-view.setting-device") }}
               </template>
               <v-container>
-                <v-btn
-                  @click="updateDevices"
-                  :disabled="isDisabledDeviceConfig"
-                  >{{
-                    $store.getters.message("config-view.update-device")
-                  }}</v-btn
-                >
-                <v-select
-                  :label="$store.getters.message('config-view.select-device')"
-                  :value="selectedDevice"
-                  @change="selectDevice"
-                  :items="devices"
-                  item-text="modelNumber"
-                  item-value="deviceName"
-                  :disabled="isDisabledDeviceConfig"
-                  :no-data-text="
-                    $store.getters.message('config-view.no-device')
-                  "
-                  return-object
-                ></v-select>
-                <v-text-field
-                  :label="$store.getters.message('config-view.os-version')"
-                  v-model="selectedDevice.osVersion"
-                  :disabled="isDisabledDeviceConfig"
-                  readonly
-                ></v-text-field>
+                <v-row :align="align" no-gutters style="height: 150px">
+                  <v-col md4>
+                    <v-btn
+                      @click="updateDevices"
+                      outlined
+                      :disabled="isDisabledDeviceConfig"
+                      >{{
+                        $store.getters.message("config-view.update-device")
+                      }}</v-btn
+                    >
+                  </v-col>
+                  <v-col md4>
+                    <v-select
+                      outlined
+                      :label="
+                        $store.getters.message('config-view.select-device')
+                      "
+                      :value="selectedDevice"
+                      @change="selectDevice"
+                      :items="devices"
+                      item-text="modelNumber"
+                      item-value="deviceName"
+                      :disabled="isDisabledDeviceConfig"
+                      :no-data-text="
+                        $store.getters.message('config-view.no-device')
+                      "
+                      return-object
+                    ></v-select>
+                  </v-col>
+                  <v-col md4>
+                    <v-text-field
+                      :label="$store.getters.message('config-view.os-version')"
+                      v-model="selectedDevice.osVersion"
+                      :disabled="isDisabledDeviceConfig"
+                      readonly
+                      outlined
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
               </v-container>
             </v-expansion-panel-content>
 
