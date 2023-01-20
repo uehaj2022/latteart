@@ -1,4 +1,3 @@
-<!-- eslint-disable prettier/prettier -->
 <!--
  Copyright 2022 NTT Corporation.
 
