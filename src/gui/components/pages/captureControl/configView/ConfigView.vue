@@ -23,12 +23,14 @@
       <v-layout row wrap>
         <v-flex xs12 pr-1 class="pb-18">
           <v-select
+            id="v-step-04"
             :label="$store.getters.message('config-view.platform')"
             :items="platformNames"
             :value="selectedPlatformName"
             @change="selectPlatform"
           ></v-select>
           <v-select
+            id="v-step-05"
             :label="$store.getters.message('config-view.browser')"
             :items="browsers"
             :value="selectedBrowser"

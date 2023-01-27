@@ -16,20 +16,20 @@
 
 <template>
   <v-layout justify-start align-center row @keydown="cancelKeydown">
-    <url-text-field />
+    <url-text-field id="v-step-00" />
     <test-result-name-text-field />
 
     <div>
       <v-layout>
-        <record-button />
+        <record-button id="v-step-01" />
         <pause-button />
         <clear-history-button />
-        <load-history-button />
+        <load-history-button id="v-step-03" />
         <menu-button />
       </v-layout>
     </div>
 
-    <v-flex shrink pa-1 pl-3>
+    <v-flex shrink pa-1 pl-3 id="v-step-02">
       <locale-select-box />
     </v-flex>
 
@@ -66,6 +66,9 @@ import MenuButton from "./MenuButton.vue";
   },
 })
 export default class CaptureToolHeader extends Vue {
+  // private mounted() {
+  //   this.$tours['myTour'].start();
+  // }
   private cancelKeydown(event: Event) {
     event.stopPropagation();
   }

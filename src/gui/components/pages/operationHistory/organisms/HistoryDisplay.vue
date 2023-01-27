@@ -40,14 +40,17 @@
           <v-flex xs12 wrap mb-0 pb-0 px-2>
             <v-radio-group v-model="diagramType" row class="py-0">
               <v-radio
+                id="v-step-07"
                 :label="message('history-view.sequence')"
                 :value="DIAGRAM_TYPE_SEQUENCE"
               ></v-radio>
               <v-radio
+                id="v-step-08"
                 :label="message('history-view.screen-transition')"
                 :value="DIAGRAM_TYPE_SCREEN_TRANSITION"
               ></v-radio>
               <v-radio
+                id="v-step-09"
                 :label="message('history-view.element-coverage')"
                 :value="DIAGRAM_TYPE_ELEMENT_COVERAGE"
               ></v-radio>
@@ -76,7 +79,13 @@
           </v-flex>
         </pane>
         <pane>
-          <v-container fluid pa-0 fill-height style="position: relative">
+          <v-container
+            fluid
+            pa-0
+            fill-height
+            style="position: relative"
+            id="v-step-09"
+          >
             <screen-shot-display :imageInfo="imageInfo"></screen-shot-display>
 
             <a

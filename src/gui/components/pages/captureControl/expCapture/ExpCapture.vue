@@ -67,11 +67,18 @@
       :message="errorDialogMessage"
       @close="errorDialogOpened = false"
     />
+    <div id="overlay"></div>
+    <v-tour
+      name="myTour"
+      :steps="steps"
+      :callbacks="myCallbacks"
+      :options="myOptions"
+    ></v-tour>
   </v-app>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import { OperationWithNotes } from "@/lib/operationHistory/types";
 import TestPurposeEditDialog from "@/components/pages/common/TestPurposeEditDialog.vue";
 import NoticeEditDialog from "@/components/pages/common/NoticeEditDialog.vue";
@@ -95,6 +102,95 @@ import AutofillSelectDialog from "@/components/pages/common/AutofillSelectDialog
   },
 })
 export default class ExpCapture extends Vue {
+  private myCustomPreviousStepCallback = (step: any) => {
+    if (this.$route.name === "historyView" && step == 7) {
+      this.$router.replace("/capture/config");
+    }
+  };
+  private myCustomNextStepCallback = (step: any) => {
+    if (this.$route.name === "configView" && step == 6) {
+      this.$router.replace("/capture/history");
+    }
+  };
+  private skipthis = (step: any) => {
+    this.closeOverlay();
+  };
+  public closeOverlay = () => {
+    document.getElementById("overlay")?.classList.add("overlayh");
+  };
+  myOptions = {
+    onEnd: () => {
+      this.closeOverlay();
+    },
+    useKeyboardNavigation: true,
+    labels: {
+      buttonSkip: this.$store.getters.message("tour.labels.buttonSkip"),
+      buttonPrevious: this.$store.getters.message("tour.labels.buttonPrevious"),
+      buttonNext: this.$store.getters.message("tour.labels.buttonNext"),
+      buttonStop: this.$store.getters.message("tour.labels.buttonStop"),
+    },
+  };
+  private finish = (step: any) => {
+    this.closeOverlay();
+  };
+  public hasSeenTour =
+    JSON.parse(localStorage.getItem("hasSeenTour") || "false") != null
+      ? JSON.parse(localStorage.getItem("hasSeenTour")!)
+      : false;
+  myCallbacks = {
+    onPreviousStep: this.myCustomPreviousStepCallback,
+    onNextStep: this.myCustomNextStepCallback,
+    onSkip: this.skipthis,
+    onFinish: this.finish,
+  };
+  public steps = [
+    {
+      target: "#v-step-00",
+      content: this.$store.getters.message("tour.URLfield"),
+    },
+    {
+      target: "#v-step-01",
+      content: this.$store.getters.message("tour.start-button"),
+    },
+    {
+      target: "#v-step-02",
+      content: this.$store.getters.message("tour.language"),
+      params: {
+        placement: "top",
+      },
+    },
+    {
+      target: "#v-step-03",
+      content: this.$store.getters.message("tour.load-saved-results"),
+    },
+    {
+      target: "#v-step-04",
+      content: this.$store.getters.message("tour.platform"),
+    },
+    {
+      target: "#v-step-05",
+      content: this.$store.getters.message("tour.browser"),
+    },
+    {
+      target: "#v-step-06",
+      content: this.$store.getters.message("tour.historyView"),
+      params: {
+        placement: "top",
+      },
+    },
+    {
+      target: "#v-step-07",
+      content: this.$store.getters.message("tour.sequenecDiagramModel"),
+    },
+    {
+      target: "#v-step-08",
+      content: this.$store.getters.message("tour.screenTransitionDiagram"),
+    },
+    {
+      target: "#v-step-09",
+      content: this.$store.getters.message("tour.webElementCoverage"),
+    },
+  ];
   private testPurposeEditDialogOpened = false;
   private noticeEditDialogOpened = false;
 
@@ -113,7 +209,75 @@ export default class ExpCapture extends Vue {
   private errorDialogOpened = false;
   private errorDialogMessage = "";
 
+  private get stepsChange() {
+    return this.$store.getters.message("tour.language");
+  }
+
+  @Watch("stepsChange")
+  private translateSteps() {
+    this.steps = [
+      {
+        target: "#v-step-00",
+        content: this.$store.getters.message("tour.URLfield"),
+      },
+      {
+        target: "#v-step-01",
+        content: this.$store.getters.message("tour.start-button"),
+      },
+      {
+        target: "#v-step-02",
+        content: this.$store.getters.message("tour.language"),
+        params: {
+          placement: "top",
+        },
+      },
+      {
+        target: "#v-step-03",
+        content: this.$store.getters.message("tour.load-saved-results"),
+      },
+      {
+        target: "#v-step-04",
+        content: this.$store.getters.message("tour.platform"),
+      },
+      {
+        target: "#v-step-05",
+        content: this.$store.getters.message("tour.browser"),
+      },
+      {
+        target: "#v-step-06",
+        content: this.$store.getters.message("tour.historyView"),
+        params: {
+          placement: "top",
+        },
+      },
+      {
+        target: "#v-step-07",
+        content: this.$store.getters.message("tour.sequenecDiagramModel"),
+      },
+      {
+        target: "#v-step-08",
+        content: this.$store.getters.message("tour.screenTransitionDiagram"),
+      },
+      {
+        target: "#v-step-09",
+        content: this.$store.getters.message("tour.webElementCoverage"),
+      },
+    ];
+    this.myOptions.labels = {
+      buttonSkip: this.$store.getters.message("tour.labels.buttonSkip"),
+      buttonPrevious: this.$store.getters.message("tour.labels.buttonPrevious"),
+      buttonNext: this.$store.getters.message("tour.labels.buttonNext"),
+      buttonStop: this.$store.getters.message("tour.labels.buttonStop"),
+    };
+  }
   private mounted() {
+    if (this.hasSeenTour) {
+      this.closeOverlay();
+    }
+    if (!this.hasSeenTour) {
+      this.$tours["myTour"].start();
+      localStorage.setItem("hasSeenTour", JSON.stringify(true));
+    }
     this.$store.commit("operationHistory/setOpenNoteEditDialogFunction", {
       openNoteEditDialog: this.openNoteEditDialog,
     });
@@ -264,6 +428,7 @@ export default class ExpCapture extends Vue {
             });
 
             return;
+
           case "bug":
           case "notice":
             await this.$store.dispatch("operationHistory/deleteNotice", {
@@ -291,6 +456,18 @@ export default class ExpCapture extends Vue {
 <style lang="sass" scoped>
 html
   overflow: hidden
+.overlayh
+  display: hidden !important
+  z-index: -99999 !important
+  background: rgba(0, 0, 0, 0) !important
+#overlay
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  z-index: 20
+  background: rgba(0, 0, 0, 0.3)
 </style>
 
 <style lang="sass">

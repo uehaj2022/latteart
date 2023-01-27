@@ -558,5 +558,23 @@
       "import-test-result-not-exist": "Test result information does not exist.",
       "create-export-data-error": "Data export failed."
     }
+  },
+  "tour":{
+    "URLfield":"1/10, Enter the URL of the website/webapp you want to test ",
+    "start-button":"2/10, Start/Stop button, to start/end the recording",
+    "load-saved-results":"4/10, Load the past test results from here",
+    "language":"3/10, You can change the language of this app from here",
+    "platform":"5/10, Choose the platform, of the app you want to test from the drop-down menu",
+    "browser":"6/10, Choose the browser, of the app you want to test from the drop-down menu",
+    "historyView":"7/10, Click on this button to go to history view",
+    "sequenecDiagramModel":"8/10, Select this to view the Sequence diagram model of the website/webapp, you tested ",
+    "screenTransitionDiagram":"9/10, Select this to view the Screen Transition diagram model of the website/webapp, you tested",
+    "webElementCoverage":"10/10, Select this to view the coverage of the web elements of the website/webapp",
+    "labels": {
+      "buttonSkip": "Skip this",
+      "buttonPrevious": "Previous",
+      "buttonNext": "Next",
+      "buttonStop": "Finish"
+    }
   }
 }
