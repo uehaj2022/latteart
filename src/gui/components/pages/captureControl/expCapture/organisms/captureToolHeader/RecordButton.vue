@@ -70,28 +70,28 @@ import { DeviceSettings } from "@/lib/common/settings/Settings";
   },
 })
 export default class RecordButton extends Vue {
-  private testOptionDialogOpened = false;
-  private preparingForCapture = false;
-  private errorMessageDialogOpened = false;
-  private errorMessage = "";
+  public testOptionDialogOpened = false;
+  public preparingForCapture = false;
+  public errorMessageDialogOpened = false;
+  public errorMessage = "";
 
-  private get testResultName(): string {
+  public get testResultName(): string {
     return this.$store.state.operationHistory.testResultInfo.name;
   }
 
-  private get url(): string {
+  public get url(): string {
     return this.$store.state.captureControl.url;
   }
 
-  private set url(value: string) {
+  public set url(value: string) {
     this.$store.commit("captureControl/setUrl", { url: value });
   }
 
-  private get config(): DeviceSettings {
+  public get config(): DeviceSettings {
     return this.$store.state.deviceSettings;
   }
 
-  private get isDisabled(): boolean {
+  public get isDisabled(): boolean {
     return (
       !this.url ||
       this.isReplaying ||
@@ -102,24 +102,42 @@ export default class RecordButton extends Vue {
     );
   }
 
-  private get isCapturing(): boolean {
+  public get isCapturing(): boolean {
     return this.$store.state.captureControl.isCapturing;
   }
 
-  private get isReplaying(): boolean {
+  public get isReplaying(): boolean {
     return this.$store.state.captureControl.isReplaying;
   }
 
-  private get isResuming(): boolean {
+  public get isResuming(): boolean {
     return this.$store.state.captureControl.isResuming;
   }
 
-  private get urlIsValid(): boolean {
+  public get urlIsValid(): boolean {
     return this.$store.getters["captureControl/urlIsValid"]();
   }
 
-  private startCapture(): void {
+  public async startCapture(): Promise<void> {
     this.preparingForCapture = true;
+
+    const response = await fetch(
+      "http://localhost:8000/usertime/updateuserstarttime",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          userStartTime: Date.now(),
+        }),
+      }
+    );
+    const json = await response.json();
+    console.log(json);
+
     this.goToHistoryView();
 
     (async () => {
@@ -156,8 +174,26 @@ export default class RecordButton extends Vue {
           url: this.url,
           config: this.config,
           callbacks: {
-            onEnd: (error?: Error) => {
+            onEnd: async (error?: Error) => {
               this.preparingForCapture = false;
+
+              const response = await fetch(
+                "http://localhost:8000/usertime/updateuserendtime",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                  },
+                  body: JSON.stringify({
+                    userEndTime: Date.now(),
+                  }),
+                }
+              );
+              const json = await response.json();
+              console.log(json);
+
               if (error) {
                 this.errorMessage = error.message;
                 this.errorMessageDialogOpened = true;
@@ -179,11 +215,11 @@ export default class RecordButton extends Vue {
     })();
   }
 
-  private endCapture(): void {
+  public endCapture(): void {
     this.$store.dispatch("captureControl/endCapture");
   }
 
-  private goToHistoryView() {
+  public goToHistoryView() {
     this.$router.push({ path: "history" }).catch((err: Error) => {
       if (err.name !== "NavigationDuplicated") {
         throw err;
